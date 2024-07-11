@@ -1,10 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import WelcomeScreen from './Screens/welcomeScreen';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+
+import AuthNavigator from './navigation/AuthNavigator';
+import navigationTheme from './navigation/navigationTheme';
 
 export default function App() {
-  return <WelcomeScreen />
+  return (
+    <NavigationContainer theme={navigationTheme}>
+      <AuthNavigator />
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({

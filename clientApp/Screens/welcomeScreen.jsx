@@ -15,7 +15,7 @@ import Font from "../constants/fonts";
 
 const { height } = Dimensions.get("window");
 
-const WelcomeScreen = () => {
+const welcomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -43,6 +43,7 @@ const WelcomeScreen = () => {
               paddingHorizontal: Spacing * 2,
               borderRadius: Spacing,
             }}
+            onPress={() => navigation.navigate("Login")}
           >
             <Text
               style={{
@@ -59,7 +60,7 @@ const WelcomeScreen = () => {
   );
 };
 
-export default WelcomeScreen;
+export default welcomeScreen;
 
 const styles = StyleSheet.create({
   container: {
