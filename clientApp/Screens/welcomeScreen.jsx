@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: Spacing * 2, // Adjust this value to increase/decrease space above the image
+    marginTop: Spacing * 2,
   },
   imageBackground: {
     height: height / 2.5,
