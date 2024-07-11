@@ -1,5 +1,13 @@
 import React from "react";
-import { Dimensions, Image, ScrollView, StyleSheet, Text } from "react-native";
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+} from "react-native";
 import * as Yup from "yup";
 
 import { AppForm, AppFormField, SubmitButton } from "../components";
@@ -16,9 +24,24 @@ const validationSchema = Yup.object().shape({
 
 const { height } = Dimensions.get("window");
 
+const users = {
+  email: "test@example.com",
+  password: "password123",
+};
+
 function LoginScreen({ navigation }) {
+  const handleSubmit = (values) => {
+    if (values.email === users.email && values.password === users.password) {
+      Alert.alert("Login Successful", "Welcome back!", [
+        { text: "OK", onPress: () => navigation.navigate("Home") },
+      ]);
+    } else {
+      Alert.alert("Login Failed", "Invalid email or password");
+    }
+  };
+
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
       <Screen style={styles.container}>
         <Image
           style={styles.imageBackground}
@@ -28,7 +51,7 @@ function LoginScreen({ navigation }) {
         <Text style={styles.titleText}>Welcome Back!</Text>
         <AppForm
           initialValues={{ email: "", password: "" }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
           <AppFormField
@@ -49,12 +72,14 @@ function LoginScreen({ navigation }) {
             secureTextEntry
             textContentType="password"
           />
-          <SubmitButton title="Login" />
+          <View style={styles.buttonContainer}>
+            <SubmitButton title="Login" />
+          </View>
         </AppForm>
         <Text style={styles.subtitleText}>
           Don't have an account?{" "}
           <Text
-            style={styles.linktext}
+            style={styles.linkText}
             onPress={() => navigation.navigate("Register")}
           >
             Register
@@ -66,31 +91,24 @@ function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+  },
   container: {
     padding: 10,
-  },
-  logo: {
-    width: 80,
-    height: 80,
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
-  },
-  linktext: {
-    color: Colors.primary,
-    fontWeight: "bold",
-    marginBottom: Spacing,
   },
   imageBackground: {
     height: height / 2.5,
     width: "100%",
-    marginBottom: Spacing * 2, // Adds space below the image
+    marginBottom: Spacing * 2,
   },
   titleText: {
     fontSize: FontSize.xxLarge,
     color: Colors.black,
     fontFamily: Font["Inter-bold"],
     textAlign: "center",
+    marginBottom: Spacing * 2,
   },
   subtitleText: {
     fontSize: FontSize.small,
@@ -98,6 +116,17 @@ const styles = StyleSheet.create({
     fontFamily: Font["Inter-regular"],
     textAlign: "center",
     marginTop: Spacing * 2,
+  },
+  linkText: {
+    color: Colors.primary,
+    fontWeight: "bold",
+    marginBottom: Spacing,
+  },
+  buttonContainer: {
+    marginTop: Spacing * 1,
+    alignItems: "center",
+    backgroundColor: Colors.primary,
+    borderRadius: Spacing,
   },
 });
 

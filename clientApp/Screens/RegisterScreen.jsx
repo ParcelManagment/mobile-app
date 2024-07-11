@@ -1,5 +1,12 @@
 import React from "react";
-import { Dimensions, Image, ScrollView, StyleSheet, Text } from "react-native";
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import * as Yup from "yup";
 
 import { AppForm, AppFormField, SubmitButton } from "../components";
@@ -78,7 +85,9 @@ function RegisterScreen({ navigation }) {
             secureTextEntry
             textContentType="password"
           />
-          <SubmitButton title="Register" />
+          <View style={styles.buttonContainer}>
+            <SubmitButton title="Register" />
+          </View>
         </AppForm>
         <Text style={styles.subtitleText}>
           Already have an account?{" "}
@@ -120,6 +129,12 @@ const styles = StyleSheet.create({
     fontFamily: Font["Inter-regular"],
     textAlign: "center",
     marginTop: Spacing * 2,
+  },
+  buttonContainer: {
+    marginTop: Spacing * 1,
+    alignItems: "center",
+    backgroundColor: Colors.primary,
+    borderRadius: Spacing,
   },
 });
 
