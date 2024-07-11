@@ -18,7 +18,7 @@ const { height } = Dimensions.get("window");
 const welcomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <View style={styles.content}>
         <ImageBackground
           style={styles.imageBackground}
           resizeMode="contain"
@@ -66,13 +66,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: Spacing * 2, // Adjust this value to increase/decrease space above the image
+  },
   imageBackground: {
     height: height / 2.5,
     width: "100%",
+    marginBottom: Spacing * 2, // Adds space below the image
   },
   textContainer: {
     paddingHorizontal: Spacing * 4,
-    paddingTop: Spacing * 4,
+    alignItems: "center", // Center align text content horizontally
   },
   titleText: {
     fontSize: FontSize.xxLarge,
@@ -86,5 +93,22 @@ const styles = StyleSheet.create({
     fontFamily: Font["Inter-regular"],
     textAlign: "center",
     marginTop: Spacing * 2,
+  },
+  buttonContainer: {
+    width: "100%", // Make the button container full width
+    paddingHorizontal: Spacing * 2,
+    paddingVertical: Spacing * 4,
+  },
+  button: {
+    backgroundColor: Colors.buttoncolor,
+    paddingVertical: Spacing * 1.5,
+    paddingHorizontal: Spacing * 2,
+    borderRadius: Spacing,
+  },
+  buttonText: {
+    fontSize: FontSize.medium,
+    fontFamily: Font["Inter-bold"],
+    color: Colors.onPrimary,
+    textAlign: "center",
   },
 });
