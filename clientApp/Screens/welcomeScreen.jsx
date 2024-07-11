@@ -12,6 +12,7 @@ import Spacing from "../constants/spacing";
 import FontSize from "../constants/fontsize";
 import Colors from "../constants/colors";
 import Font from "../constants/fonts";
+import AppButton from "../components/AppButton";
 
 const { height } = Dimensions.get("window");
 
@@ -30,6 +31,7 @@ const WelcomeScreen = ({ navigation }) => {
             Check the progress of your deliveries
           </Text>
         </View>
+<<<<<<< HEAD
         <View style={styles.buttonWrapper}>
           <TouchableOpacity
             style={styles.button}
@@ -38,6 +40,14 @@ const WelcomeScreen = ({ navigation }) => {
             <Text style={styles.buttonText}>Get Started</Text>
           </TouchableOpacity>
         </View>
+=======
+      </View>
+      <View style={styles.buttonContainer}>
+        <AppButton
+          title="Get Started"
+          onPress={() => navigation.navigate("Login")}
+        />
+>>>>>>> 699565acf742a4e1abe4500ec9be16a47aaf128f
       </View>
     </SafeAreaView>
   );
@@ -66,7 +76,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: FontSize.xxLarge,
-    color: Colors.primary,
+    color: Colors.black,
     fontFamily: Font["Inter-bold"],
     textAlign: "center",
   },
@@ -82,6 +92,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing * 4,
     width: "100%",
   },
+<<<<<<< HEAD
   button: {
     backgroundColor: Colors.buttoncolor,
     paddingVertical: Spacing * 1.5,
@@ -95,4 +106,6 @@ const styles = StyleSheet.create({
     color: Colors.onPrimary,
     textAlign: "center",
   },
+=======
+>>>>>>> 699565acf742a4e1abe4500ec9be16a47aaf128f
 });
