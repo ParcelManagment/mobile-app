@@ -50,16 +50,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: Spacing * 2,
+    marginTop: Spacing * 2, // Adjust this value to increase/decrease space above the image
   },
   imageBackground: {
     height: height / 2.5,
     width: "100%",
-    marginBottom: Spacing * 2,
+    marginBottom: Spacing * 2, // Adds space below the image
   },
   textContainer: {
     paddingHorizontal: Spacing * 4,
-    alignItems: "center",
+    alignItems: "center", // Center align text content horizontally
   },
   titleText: {
     fontSize: FontSize.xxLarge,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing * 2,
   },
   buttonContainer: {
-    width: "100%",
+    width: "100%", // Make the button container full width
     paddingHorizontal: Spacing * 2,
     paddingVertical: Spacing * 4,
   },
