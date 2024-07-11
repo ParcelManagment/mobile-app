@@ -15,7 +15,7 @@ import Font from "../constants/fonts";
 
 const { height } = Dimensions.get("window");
 
-const welcomeScreen = ({navigation}) => {
+const WelcomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -30,29 +30,12 @@ const welcomeScreen = ({navigation}) => {
             Check the progress of your deliveries
           </Text>
         </View>
-        <View
-          style={{
-            paddingHorizontal: Spacing * 2,
-            paddingVertical: Spacing * 4,
-          }}
-        >
+        <View style={styles.buttonWrapper}>
           <TouchableOpacity
-            style={{
-              backgroundColor: Colors.primary,
-              paddingVertical: Spacing * 1.5,
-              paddingHorizontal: Spacing * 2,
-              borderRadius: Spacing,
-            }}
+            style={styles.button}
             onPress={() => navigation.navigate("Login")}
           >
-            <Text
-              style={{
-                fontFamily: Font["Inter-bold"],
-                color: Colors.onPrimary,
-              }}
-            >
-              Get Started
-            </Text>
+            <Text style={styles.buttonText}>Get Started</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -60,7 +43,7 @@ const welcomeScreen = ({navigation}) => {
   );
 };
 
-export default welcomeScreen;
+export default WelcomeScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -75,11 +58,11 @@ const styles = StyleSheet.create({
   imageBackground: {
     height: height / 2.5,
     width: "100%",
-    marginBottom: Spacing * 2, // Adds space below the image
+    marginBottom: Spacing * 2,
   },
   textContainer: {
     paddingHorizontal: Spacing * 4,
-    alignItems: "center", // Center align text content horizontally
+    alignItems: "center",
   },
   titleText: {
     fontSize: FontSize.xxLarge,
@@ -94,16 +77,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: Spacing * 2,
   },
-  buttonContainer: {
-    width: "100%", // Make the button container full width
+  buttonWrapper: {
     paddingHorizontal: Spacing * 2,
     paddingVertical: Spacing * 4,
+    width: "100%",
   },
   button: {
     backgroundColor: Colors.buttoncolor,
     paddingVertical: Spacing * 1.5,
     paddingHorizontal: Spacing * 2,
     borderRadius: Spacing,
+    alignItems: "center",
   },
   buttonText: {
     fontSize: FontSize.medium,
