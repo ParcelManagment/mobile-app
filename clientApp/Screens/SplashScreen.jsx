@@ -2,14 +2,15 @@ import React, { useEffect } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import Colors from "../constants/colors";
+
 const SplashScreen = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Navigate to WelcomeScreen after 2 seconds
     const timer = setTimeout(() => {
       navigation.replace("Welcome");
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [navigation]);
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white,
   },
   image: {
     width: 200,
