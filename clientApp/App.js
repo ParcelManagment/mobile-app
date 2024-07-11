@@ -1,21 +1,23 @@
-// App.js
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
-import "react-native-gesture-handler";
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import SplashScreen from "./Screens/SplashScreen";
-import WelcomeScreen from "./Screens/welcomeScreen";
-
-const Stack = createStackNavigator();
+import AuthNavigator from './navigation/AuthNavigator';
+import navigationTheme from './navigation/navigationTheme';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      </Stack.Navigator>
+    <NavigationContainer theme={navigationTheme}>
+      <AuthNavigator />
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

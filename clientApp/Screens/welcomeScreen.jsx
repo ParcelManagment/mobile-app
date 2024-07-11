@@ -15,7 +15,7 @@ import Font from "../constants/fonts";
 
 const { height } = Dimensions.get("window");
 
-const WelcomeScreen = () => {
+const welcomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -30,9 +30,29 @@ const WelcomeScreen = () => {
             Check the progress of your deliveries
           </Text>
         </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Get Started</Text>
+        <View
+          style={{
+            paddingHorizontal: Spacing * 2,
+            paddingVertical: Spacing * 4,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.primary,
+              paddingVertical: Spacing * 1.5,
+              paddingHorizontal: Spacing * 2,
+              borderRadius: Spacing,
+            }}
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Text
+              style={{
+                fontFamily: Font["Inter-bold"],
+                color: Colors.onPrimary,
+              }}
+            >
+              Get Started
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -40,7 +60,7 @@ const WelcomeScreen = () => {
   );
 };
 
-export default WelcomeScreen;
+export default welcomeScreen;
 
 const styles = StyleSheet.create({
   container: {
