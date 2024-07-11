@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: Spacing,
   },
   buttonText: {
+    fontSize: FontSize.medium,
     fontFamily: Font["Inter-bold"],
     color: Colors.onPrimary,
     textAlign: "center",

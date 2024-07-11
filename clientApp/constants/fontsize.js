@@ -1,8 +1,8 @@
 const FontSize = {
-    small: 14,
-    medium: 18,
-    large: 22,
-    xLarge: 28,
-    xxLarge: 34,
+    small: 16,
+    medium: 20,
+    large: 28,
+    xLarge: 32,
+    xxLarge: 36,
 };
 export default FontSize;
