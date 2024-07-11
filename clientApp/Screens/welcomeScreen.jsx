@@ -12,10 +12,11 @@ import Spacing from "../constants/spacing";
 import FontSize from "../constants/fontsize";
 import Colors from "../constants/colors";
 import Font from "../constants/fonts";
+import AppButton from "../components/AppButton";
 
 const { height } = Dimensions.get("window");
 
-const welcomeScreen = ({navigation}) => {
+const WelcomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -30,37 +31,18 @@ const welcomeScreen = ({navigation}) => {
             Check the progress of your deliveries
           </Text>
         </View>
-        <View
-          style={{
-            paddingHorizontal: Spacing * 2,
-            paddingVertical: Spacing * 4,
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              backgroundColor: Colors.primary,
-              paddingVertical: Spacing * 1.5,
-              paddingHorizontal: Spacing * 2,
-              borderRadius: Spacing,
-            }}
-            onPress={() => navigation.navigate("Login")}
-          >
-            <Text
-              style={{
-                fontFamily: Font["Inter-bold"],
-                color: Colors.onPrimary,
-              }}
-            >
-              Get Started
-            </Text>
-          </TouchableOpacity>
-        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <AppButton
+          title="Get Started"
+          onPress={() => navigation.navigate("Login")}
+        />
       </View>
     </SafeAreaView>
   );
 };
 
-export default welcomeScreen;
+export default WelcomeScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -83,7 +65,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: FontSize.xxLarge,
-    color: Colors.primary,
+    color: Colors.black,
     fontFamily: Font["Inter-bold"],
     textAlign: "center",
   },
@@ -98,17 +80,5 @@ const styles = StyleSheet.create({
     width: "100%", // Make the button container full width
     paddingHorizontal: Spacing * 2,
     paddingVertical: Spacing * 4,
-  },
-  button: {
-    backgroundColor: Colors.buttoncolor,
-    paddingVertical: Spacing * 1.5,
-    paddingHorizontal: Spacing * 2,
-    borderRadius: Spacing,
-  },
-  buttonText: {
-    fontSize: FontSize.medium,
-    fontFamily: Font["Inter-bold"],
-    color: Colors.onPrimary,
-    textAlign: "center",
   },
 });
