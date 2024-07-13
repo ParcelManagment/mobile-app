@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   Image,
@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Alert,
 } from "react-native";
 import * as Yup from "yup";
 
@@ -29,7 +30,38 @@ const validationSchema = Yup.object().shape({
 
 const { height } = Dimensions.get("window");
 
+const user = {
+  firstname: "John",
+  lastname: "Doe",
+  mobile: "0711234567",
+  email: "johndoe@gmail.com",
+  password: "johndoe123",
+};
+
 function RegisterScreen({ navigation }) {
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleSubmit = (values) => {
+    if (
+      values.firstname === user.firstname &&
+      values.lastname === user.lastname &&
+      values.mobile === user.mobile &&
+      values.email === user.email &&
+      values.password === user.password
+    ) {
+      setSuccessMessage("Registration Successful! Welcome!");
+      Alert.alert("Registration Successful", "Welcome!", [
+        { text: "OK", onPress: () => navigation.navigate("Login") },
+      ]);
+    } else {
+      setSuccessMessage("Registration failed. Please try again.");
+      Alert.alert(
+        "Registration Failed",
+        "Please check your details and try again."
+      );
+    }
+  };
+
   return (
     <ScrollView>
       <Screen style={styles.container}>
@@ -38,6 +70,7 @@ function RegisterScreen({ navigation }) {
           resizeMode="contain"
           source={require("../Assets/images/register.png")}
         />
+        <Text style={styles.titleText}>Register</Text>
         <AppForm
           initialValues={{
             firstname: "",
@@ -46,7 +79,7 @@ function RegisterScreen({ navigation }) {
             email: "",
             password: "",
           }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
           <AppFormField
@@ -89,6 +122,9 @@ function RegisterScreen({ navigation }) {
             <SubmitButton title="Register" />
           </View>
         </AppForm>
+        {successMessage ? (
+          <Text style={styles.successText}>{successMessage}</Text>
+        ) : null}
         <Text style={styles.subtitleText}>
           Already have an account?{" "}
           <Text
@@ -135,6 +171,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.primary,
     borderRadius: Spacing,
+  },
+  successText: {
+    fontSize: FontSize.medium,
+    color: Colors.success,
+    textAlign: "center",
+    marginTop: Spacing * 2,
   },
 });
 
