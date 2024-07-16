@@ -43,7 +43,7 @@ const ChatScreen = () => {
           width="85%"
           value={inputText}
           onChangeText={setInputText}
-          placeholder="Type a message"
+          placeholder="Type message"
           line
         />
         <View style={styles.button}>
