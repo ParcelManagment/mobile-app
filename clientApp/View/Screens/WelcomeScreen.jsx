@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: FontSize.medium,
     fontFamily: Font["Inter-bold"],
-    color: Colors.onPrimary,
+    color: Colors.black,
     textAlign: "center",
   },
 });
