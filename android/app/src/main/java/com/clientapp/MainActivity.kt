@@ -1,4 +1,4 @@
-package com.clientapp
+package com.mobile-app
 
 import android.os.Build
 import android.os.Bundle

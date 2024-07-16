@@ -1,4 +1,4 @@
-package com.clientapp
+package com.mobile-app
 
 import android.app.Application
 import android.content.res.Configuration

@@ -1,4 +1,4 @@
-rootProject.name = 'clientApp'
+rootProject.name = 'mobile-app'
 
 dependencyResolutionManagement {
   versionCatalogs {
