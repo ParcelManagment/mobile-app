@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing * 2,
   },
   imageBackground: {
-    height: height / 2.5,
+    height: height / 2,
     width: "100%",
     marginBottom: Spacing * 2,
   },
