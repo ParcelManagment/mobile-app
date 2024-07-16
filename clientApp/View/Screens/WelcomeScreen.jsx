@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing * 2,
   },
   imageBackground: {
-    height: height / 2,
+    height: height / 2.5,
     width: "100%",
     marginBottom: Spacing * 2,
   },
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: FontSize.medium,
     fontFamily: Font["Inter-bold"],
-    color: Colors.black,
+    color: Colors.onPrimary,
     textAlign: "center",
   },
 });
