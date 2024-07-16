@@ -40,7 +40,7 @@ const WelcomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.buttonContainer}>
+      <View>
         <AppButton
           title="Get Started"
           onPress={() => navigation.navigate("Login")}
@@ -84,11 +84,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: Spacing * 2,
   },
-  buttonWrapper: {
-    paddingHorizontal: Spacing * 2,
-    paddingVertical: Spacing * 4,
-    width: "100%",
-  },
   button: {
     backgroundColor: Colors.primary,
     paddingVertical: Spacing * 1.5,
@@ -99,7 +94,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: FontSize.medium,
     fontFamily: Font["Inter-bold"],
-    color: Colors.onPrimary,
+    color: Colors.white,
     textAlign: "center",
   },
 });
