@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import {
   Dimensions,
   Image,
@@ -39,16 +40,41 @@ const user = {
 };
 
 function RegisterScreen({ navigation }) {
+async function userRegistration(values) {
+    axios({
+        method: 'post',
+        url: 'http://13.60.18.198:3000/users/signup',
+        data: {
+            fname: values.firstname,
+            lname: values.lastname,
+            password: values.password,
+            email: values.email,
+            mobileNum: values.mobile
+        },
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log('User registered successfully:', response.data);
+    })
+    .catch(error => {
+        console.error('There was an error registering the user!', error);
+    });
+}
+
+
   const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSubmit = (values) => {
+  const handleSubmit =async (values) => {
     if (
-      values.firstname === user.firstname &&
-      values.lastname === user.lastname &&
-      values.mobile === user.mobile &&
-      values.email === user.email &&
-      values.password === user.password
+      values.firstname !== null &&
+      values.lastname !== null &&
+      values.mobile !== null &&
+      values.email !== null &&
+      values.password 
     ) {
+      await userRegistration(values)
       setSuccessMessage("Registration Successful! Welcome!");
       Alert.alert("Registration Successful", "Welcome!", [
         { text: "OK", onPress: () => navigation.navigate("Login") },
