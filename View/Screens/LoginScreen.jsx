@@ -31,7 +31,11 @@ const users = {
 
 function LoginScreen({ navigation }) {
   const handleSubmit = (values) => {
+
+
     if (values.email === users.email && values.password === users.password) {
+
+      
       Alert.alert("Login Successful", "Welcome back!", [
         { text: "OK", onPress: () => navigation.navigate("Home") },
       ]);

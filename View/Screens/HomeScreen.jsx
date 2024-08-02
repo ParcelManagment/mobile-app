@@ -19,10 +19,16 @@ function HomeScreen({ navigation }) {
     <Screen style={styles.container}>
       <Text style={styles.titleText}>Home</Text>
       <TouchableOpacity
-        style={styles.fab}
+        style={styles.chatFab}
         onPress={() => navigation.navigate("Chat")}
       >
         <Ionicons name="chatbubble-ellipses-outline" size={24} color="white" />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.locationFab}
+        onPress={() => navigation.navigate("Location")}
+      >
+        <Ionicons name="location-sharp" size={24} color="white" />
       </TouchableOpacity>
     </Screen>
   );
@@ -34,20 +40,39 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f8f9fa",
-    padding: Spacing,
+    padding: 20,
   },
   titleText: {
-    fontSize: FontSize.xxLarge,
-    color: Colors.black,
+    fontSize: 24,
+    color: "black",
     fontFamily: "Inter-bold",
     textAlign: "center",
-    marginBottom: Spacing * 2,
+    marginBottom: 40,
   },
-  fab: {
+  chatFab: {
     position: "absolute",
     bottom: 30,
-    right: 30,
+    right: -45,
     backgroundColor: Colors.primary,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  locationFab: {
+    position: "absolute",
+    bottom: 30,
+    right: 45,
+    backgroundColor: Colors.primary, 
     width: 60,
     height: 60,
     borderRadius: 30,
