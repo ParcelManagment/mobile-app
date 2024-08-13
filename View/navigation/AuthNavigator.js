@@ -8,6 +8,7 @@ import RegisterScreen from "../Screens/RegisterScreen";
 import SplashScreen from '../Screens/SplashScreen';
 import ChatScreen from '../Screens/ChatScreen';
 import LocationScreen from '../Screens/LocationScreen';
+import MapScreen from '../Screens/MapScreen';
 const Stack = createStackNavigator();
 
 const AuthNavigator = () => (
@@ -27,6 +28,7 @@ const AuthNavigator = () => (
     <Stack.Screen name="Location" component={LocationScreen} />
     <Stack.Screen name="Home" component={HomeScreen} />
     <Stack.Screen name="Chat" component={ChatScreen} />
+    <Stack.Screen name="Map" component={MapScreen} />
   </Stack.Navigator>
 );
 

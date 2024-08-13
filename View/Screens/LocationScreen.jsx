@@ -7,7 +7,7 @@ import {
   Alert,
   StyleSheet,
 } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 const devices = [
   { id: "1", name: "Device 1" },
   { id: "2", name: "Device 2" },
@@ -16,11 +16,13 @@ const devices = [
 ];
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   const [selectedDevice, setSelectedDevice] = useState(null);
 
   const handleDeviceSelect = (device) => {
     setSelectedDevice(device);
     Alert.alert("Device Selected", `Device ID: ${device.id}`);
+    navigation.navigate("Map", { device });
   };
 
   const renderDevice = ({ item }) => (
