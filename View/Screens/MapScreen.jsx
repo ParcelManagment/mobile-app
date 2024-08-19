@@ -18,6 +18,7 @@ const MapScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
+    
       <Text style={styles.titleText}>Map Screen</Text>
       <Text style={styles.deviceInfoText}>Selected Device: {device.name}</Text>
       <Text style={styles.deviceInfoText}>Device ID: {device.id}</Text>
