@@ -12,18 +12,49 @@ const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
 
-  const handleSend = () => {
-    if (inputText.trim()) {
-      const newMessage = {
-        id: Math.random().toString(),
-        text: inputText,
-        timestamp: new Date().toLocaleTimeString(),
-      };
-      setMessages([newMessage, ...messages]);
-      setInputText("");
-    }
-  };
+const handleSend = async () => {
+  if (inputText.trim()) {
+    const newMessage = {
+      id: Math.random().toString(),
+      text: inputText,
+      timestamp: new Date().toLocaleTimeString(),
+    };
 
+    // Update local messages
+    setMessages([newMessage, ...messages]);
+
+ 
+    setInputText("");
+
+    
+    try {
+      console.log("This is input text : ",inputText);
+      const response = await fetch("http://server-url/custom", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customMessage: inputText,
+          uId: "user-id", // user ID 
+          deviceId: "device-id", // device ID
+          dateTime: new Date().toISOString(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("Error:", data.Error);
+      } else {
+        alert("Message sent successfully");
+        console.log("Message sent successfully:", data);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  }
+};
   return (
     <Screen style={styles.container}>
       <FlatList
@@ -34,7 +65,7 @@ const ChatScreen = () => {
           <ChatMessage
             text={item.text}
             timestamp={item.timestamp}
-            isUser={item.isUser}
+            isUser={true}
           />
         )}
       />
