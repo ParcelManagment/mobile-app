@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   Dimensions,
   Image,
@@ -29,19 +30,47 @@ const users = {
   password: "password123",
 };
 
+
+
 function LoginScreen({ navigation }) {
-  const handleSubmit = (values) => {
 
+  async function userLogin(values) {
+    axios({
+      method: "post",
+      url: "http://13.60.18.198:3000/users/login",
+      data: {
+        password: values.password,
+        email: values.email,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+         Alert.alert("Login Successful", "Welcome back!", [
+           { text: "OK", onPress: () => navigation.navigate("Home") },
+         ]);
+        console.log("User Login successfully:", response.data);
+      })
+      .catch((error) => {
+      Alert.alert("Login Failed", "Invalid email or password");        
+        console.error("There was an error Login the user!", error);
+      });
+  }
 
-    if (values.email === users.email && values.password === users.password) {
+  const handleSubmit =async (values) => {
+
+    await userLogin(values);
+
+    // if (values.email === users.email && values.password === users.password) {
 
       
-      Alert.alert("Login Successful", "Welcome back!", [
-        { text: "OK", onPress: () => navigation.navigate("Home") },
-      ]);
-    } else {
-      Alert.alert("Login Failed", "Invalid email or password");
-    }
+    //   Alert.alert("Login Successful", "Welcome back!", [
+    //     { text: "OK", onPress: () => navigation.navigate("Home") },
+    //   ]);
+    // } else {
+    //   Alert.alert("Login Failed", "Invalid email or password");
+    // }
   };
 
   return (
