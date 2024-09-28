@@ -40,27 +40,29 @@ const user = {
 };
 
 function RegisterScreen({ navigation }) {
+
+
 async function userRegistration(values) {
     axios({
-        method: 'post',
-        url: 'http://13.60.18.198:3000/users/signup',
-        data: {
-            fname: values.firstname,
-            lname: values.lastname,
-            password: values.password,
-            email: values.email,
-            mobileNum: values.mobile
-        },
-        headers: {
-            'Content-Type': 'application/json'
-        }
+      method: "post",
+      url: " https://parcelmanagement.netlify.app/api/users/signup",
+      data: {
+        fname: values.firstname,
+        lname: values.lastname,
+        password: values.password,
+        email: values.email,
+        mobileNum: values.mobile,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => {
-        console.log('User registered successfully:', response.data);
-    })
-    .catch(error => {
-        console.error('There was an error registering the user!', error);
-    });
+      .then((response) => {
+        console.log("User registered successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error registering the user!", error);
+      });
 }
 
 

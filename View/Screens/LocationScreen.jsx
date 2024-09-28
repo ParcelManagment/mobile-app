@@ -10,10 +10,12 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 //below is my device list.edit it after connect to server
+
+//change name to parcel
 const devices = [
-  { id: "1", name: "Device 1" },
-  { id: "2", name: "Device 2" },
-  { id: "3", name: "Device 3" },
+  { id: "1", name: "Parcel 1 kaluthara to jaffna", },
+  { id: "2", name: "Parcel 2 galle to mathara" },
+  { id: "3", name: "Parcel 3 maradana to galle" },
   
 ];
 

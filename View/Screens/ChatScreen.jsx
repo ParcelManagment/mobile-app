@@ -11,37 +11,43 @@ import ChatMessage from "../components/ChatMessage";
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
-
+  const [isSending, setIsSending] = useState(false);
 const handleSend = async () => {
-  if (inputText.trim()) {
+
+if (isSending || !inputText.trim()) return;
+setIsSending(true);
+
+  
     const newMessage = {
       id: Math.random().toString(),
       text: inputText,
       timestamp: new Date().toLocaleTimeString(),
+      isUser: true,
     };
 
     // Update local messages
-    setMessages([newMessage, ...messages]);
+    setMessages((prevMessages) => [userMessage, ...prevMessages]);
 
- 
     setInputText("");
 
-    
+    //"https://parcelmanagement.netlify.app/model/chat/message/custom",
     try {
-      console.log("This is input text : ",inputText);
-      const response = await fetch("http://server-url/custom", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          customMessage: inputText,
-          uId: "user-id", // user ID 
-          deviceId: "device-id", // device ID
-          dateTime: new Date().toISOString(),
-        }),
-      });
-
+      console.log("This is input text : ", inputText);
+      const response = await fetch(
+        "https://parcelmanagement.netlify.app/model/chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: inputText,
+          }),
+        }
+      );
+      //uId: "user-id", // user ID
+      //deviceId: "device-id", // device ID
+      //dateTime: new Date().toISOString(),
       const data = await response.json();
 
       if (!response.ok) {
@@ -49,11 +55,23 @@ const handleSend = async () => {
       } else {
         alert("Message sent successfully");
         console.log("Message sent successfully:", data);
+        //set to display the message sent
+        //response message set to display
+        const botMessage = {
+          id: Math.random().toString(),
+          text: data.response, // Assuming the response is inside the "response" field
+          timestamp: new Date().toISOString(),
+          isUser: false, // To mark it as a bot message
+        };
+        setMessages((prevMessages) => [botMessage, ...prevMessages]); // Add bot's message to the state
+
       }
     } catch (error) {
       console.error("Error sending message:", error);
+    } finally {
+      setIsSending(false); // Re-enable button
     }
-  }
+  
 };
   return (
     <Screen style={styles.container}>
@@ -65,7 +83,7 @@ const handleSend = async () => {
           <ChatMessage
             text={item.text}
             timestamp={item.timestamp}
-            isUser={true}
+            isUser={item.isUser}
           />
         )}
       />
