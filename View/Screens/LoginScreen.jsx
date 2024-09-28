@@ -37,7 +37,7 @@ function LoginScreen({ navigation }) {
   async function userLogin(values) {
     axios({
       method: "post",
-      url: "http://13.60.18.198:3000/users/login",
+      url: " https://parcelmanagement.netlify.app/api/users/login",
       data: {
         password: values.password,
         email: values.email,
@@ -47,13 +47,13 @@ function LoginScreen({ navigation }) {
       },
     })
       .then((response) => {
-         Alert.alert("Login Successful", "Welcome back!", [
-           { text: "OK", onPress: () => navigation.navigate("Home") },
-         ]);
+        Alert.alert("Login Successful", "Welcome back!", [
+          { text: "OK", onPress: () => navigation.navigate("Home") },
+        ]);
         console.log("User Login successfully:", response.data);
       })
       .catch((error) => {
-      Alert.alert("Login Failed", "Invalid email or password");        
+        Alert.alert("Login Failed", "Invalid email or password");
         console.error("There was an error Login the user!", error);
       });
   }
