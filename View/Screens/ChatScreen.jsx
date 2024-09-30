@@ -34,7 +34,7 @@ setIsSending(true);
     try {
       console.log("This is input text : ", inputText);
       const response = await fetch(
-        "https://parcelmanagement.netlify.app/model/chat",
+        "https://railexpress.netlify.app/model/chat",
         {
           method: "POST",
           headers: {
