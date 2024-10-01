@@ -25,10 +25,7 @@ const validationSchema = Yup.object().shape({
 
 const { height } = Dimensions.get("window");
 
-const users = {
-  email: "test@example.com",
-  password: "password123",
-};
+
 
 
 
