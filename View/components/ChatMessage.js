@@ -7,10 +7,12 @@ const ChatMessage = ({ text, timestamp, isUser }) => {
         <View
             style={[
                 styles.messageContainer,
-                { alignSelf: isUser ? "flex-start" : "flex-end", backgroundColor: isUser ? Colors.primary : Colors.gray },
+                isUser ? styles.userMessage : styles.botMessage,
             ]}
         >
-            <Text style={styles.messageText}>{text}</Text>
+            <Text style={[styles.messageText, isUser ? styles.userText : styles.botText]}>
+                {text}
+            </Text>
             <Text style={styles.timestamp}>{timestamp}</Text>
         </View>
     );
@@ -19,10 +21,23 @@ const ChatMessage = ({ text, timestamp, isUser }) => {
 const styles = StyleSheet.create({
     messageContainer: {
         padding: 10,
-        backgroundColor: Colors.gray,
         borderRadius: 10,
         marginVertical: 5,
-        maxWidth: "85%",
+        maxWidth: "80%",
+    },
+    userMessage: {
+        backgroundColor: Colors.primary,
+        alignSelf: "flex-end",
+    },
+    botMessage: {
+        backgroundColor: Colors.gray,
+        alignSelf: "flex-start",
+    },
+    userText: {
+        color: Colors.white,
+    },
+    botText: {
+        color: Colors.black,
     },
     messageText: {
         fontSize: 16,
@@ -31,6 +46,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: Colors.medium,
         textAlign: "right",
+        marginTop: 5,
     },
 });
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   Dimensions,
@@ -8,6 +8,7 @@ import {
   Text,
   View,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import * as Yup from "yup";
 
@@ -17,6 +18,7 @@ import Font from "../constants/fonts";
 import FontSize from "../constants/fontsize";
 import Screen from "../components/Screen";
 import Spacing from "../constants/spacing";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -25,15 +27,8 @@ const validationSchema = Yup.object().shape({
 
 const { height } = Dimensions.get("window");
 
-const users = {
-  email: "test@example.com",
-  password: "password123",
-};
-
-
-
 function LoginScreen({ navigation }) {
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
   async function userLogin(values) {
     axios({
       method: "post",
@@ -58,13 +53,9 @@ function LoginScreen({ navigation }) {
       });
   }
 
-  const handleSubmit =async (values) => {
-
+  const handleSubmit = async (values) => {
     await userLogin(values);
-
     // if (values.email === users.email && values.password === users.password) {
-
-      
     //   Alert.alert("Login Successful", "Welcome back!", [
     //     { text: "OK", onPress: () => navigation.navigate("Home") },
     //   ]);
@@ -102,8 +93,19 @@ function LoginScreen({ navigation }) {
             icon="lock"
             placeholder="Password"
             name="password"
-            secureTextEntry
+            secureTextEntry={!passwordVisible}
             textContentType="password"
+            secIcon={
+              <TouchableOpacity
+                onPress={() => setPasswordVisible(!passwordVisible)}
+              >
+                <MaterialIcons
+                  name={passwordVisible ? "visibility-off" : "visibility"}
+                  size={24}
+                  color={Colors.medium}
+                />
+              </TouchableOpacity>
+            }
           />
           <View style={styles.buttonContainer}>
             <SubmitButton title="Login" />

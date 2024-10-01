@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import {
   Dimensions,
   Image,
@@ -8,6 +8,7 @@ import {
   Text,
   View,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import * as Yup from "yup";
 
@@ -17,6 +18,7 @@ import Font from "../constants/fonts";
 import FontSize from "../constants/fontsize";
 import Screen from "../components/Screen";
 import Spacing from "../constants/spacing";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required().label("First Name"),
@@ -24,7 +26,7 @@ const validationSchema = Yup.object().shape({
   mobile: Yup.string()
     .required()
     .label("Mobile")
-    .matches(/^[0-9]{10}$/, "Mobile number must be exactly 10 digits"),
+    .matches(/^[0-9]{10}$/, "Mobile number must be  exactly 10 digits"),
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
 });
@@ -40,9 +42,8 @@ const user = {
 };
 
 function RegisterScreen({ navigation }) {
-
-
-async function userRegistration(values) {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  async function userRegistration(values) {
     axios({
       method: "post",
       url: "https://railexpress.netlify.app/api/users/signup",
@@ -63,20 +64,19 @@ async function userRegistration(values) {
       .catch((error) => {
         console.error("There was an error registering the user!", error);
       });
-}
-
+  }
 
   const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSubmit =async (values) => {
+  const handleSubmit = async (values) => {
     if (
       values.firstname !== null &&
       values.lastname !== null &&
       values.mobile !== null &&
       values.email !== null &&
-      values.password 
+      values.password
     ) {
-      await userRegistration(values)
+      await userRegistration(values);
       setSuccessMessage("Registration Successful! Welcome!");
       Alert.alert("Registration Successful", "Welcome!", [
         { text: "OK", onPress: () => navigation.navigate("Login") },
@@ -143,8 +143,19 @@ async function userRegistration(values) {
             icon="lock"
             name="password"
             placeholder="Password"
-            secureTextEntry
+            secureTextEntry={!passwordVisible}
             textContentType="password"
+            secIcon={
+              <TouchableOpacity
+                onPress={() => setPasswordVisible(!passwordVisible)}
+              >
+                <MaterialIcons
+                  name={passwordVisible ? "visibility-off" : "visibility"}
+                  size={24}
+                  color={Colors.medium}
+                />
+              </TouchableOpacity>
+            }
           />
           <View style={styles.buttonContainer}>
             <SubmitButton title="Register" />
@@ -179,7 +190,7 @@ const styles = StyleSheet.create({
   imageBackground: {
     height: height / 4,
     width: "100%",
-    marginBottom: Spacing * 2, // Adds space below the image
+    marginBottom: Spacing * 2,
   },
   titleText: {
     fontSize: FontSize.xxLarge,
