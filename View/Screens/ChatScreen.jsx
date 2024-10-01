@@ -12,60 +12,62 @@ const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
   const [isSending, setIsSending] = useState(false);
-const handleSend = async () => {
-  if (isSending || !inputText.trim()) return;
-  setIsSending(true);
 
-  const newMessage = {
-    id: Math.random().toString(),
-    text: inputText,
-    timestamp: new Date().toLocaleTimeString(),
-    isUser: true,
+  const handleSend = async () => {
+    if (isSending || !inputText.trim()) return;
+    setIsSending(true);
+
+    const newMessage = {
+      id: Math.random().toString(),
+      text: inputText,
+      timestamp: new Date().toLocaleTimeString(),
+      isUser: true, // This message is from the user
+    };
+
+    // Update local messages with user message (fix: use newMessage instead of inputText)
+    setMessages((prevMessages) => [newMessage, ...prevMessages]);
+
+    setInputText("");
+
+    try {
+      console.log("This is input text : ", inputText);
+      const response = await fetch(
+        "https://railexpress.netlify.app/model/chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: inputText,
+          }),
+        }
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("Error:", data.Error);
+      } else {
+        // console.log("Message sent successfully:", data);
+
+        // Create a bot response message
+        const botMessage = {
+          id: Math.random().toString(),
+          text: data.response, // Assuming the response is inside the "response" field
+          timestamp: new Date().toLocaleTimeString(),
+          isUser: false, // This message is from the bot
+        };
+
+        // Add bot's message to the state
+        setMessages((prevMessages) => [botMessage, ...prevMessages]);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setIsSending(false); // Re-enable the button
+    }
   };
 
-  // Update local messages
-  setMessages((prevMessages) => [inputText, ...prevMessages]);
-
-  setInputText("");
-
-  //"https://railexpress.netlify.app/model/chat/message/custom",
-  try {
-    console.log("This is input text : ", inputText);
-    const response = await fetch("https://railexpress.netlify.app/model/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: inputText,
-      }),
-    });
-    //uId: "user-id", // user ID
-    //deviceId: "device-id", // device ID
-    //dateTime: new Date().toISOString(),
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("Error:", data.Error);
-    } else {
-      alert("Message  sent successfully");
-      console.log("Message sent successfully:", data);
-      //set to display the message sent
-      //response message set to display
-      const botMessage = {
-        id: Math.random().toString(),
-        text: data.response, // Assuming the response is inside the "response" field
-        timestamp: new Date().toISOString(),
-        isUser: false, // To mark it as a bot message
-      };
-      setMessages((prevMessages) => [botMessage, ...prevMessages]); // Add bot's message to the state
-    }
-  } catch (error) {
-    console.error("Error sending message:", error);
-  } finally {
-    setIsSending(false); // Re-enable button
-  }
-};
   return (
     <Screen style={styles.container}>
       <FlatList
@@ -89,7 +91,7 @@ const handleSend = async () => {
           line
         />
         <View style={styles.button}>
-          <TouchableOpacity onPress={handleSend}>
+          <TouchableOpacity onPress={handleSend} disabled={isSending}>
             <Icon name="send" size={50} backgroundColor={Colors.primary} />
           </TouchableOpacity>
         </View>
