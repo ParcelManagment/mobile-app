@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
   mobile: Yup.string()
     .required()
     .label("Mobile")
-    .matches(/^[0-9]{10}$/, "Mobile number must be exactly 10 digits"),
+    .matches(/^[0-9]{10}$/, "Mobile number must be  exactly 10 digits"),
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
 });
