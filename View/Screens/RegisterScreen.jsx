@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import {
   Dimensions,
   Image,
@@ -8,6 +8,7 @@ import {
   Text,
   View,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import * as Yup from "yup";
 
@@ -17,6 +18,7 @@ import Font from "../constants/fonts";
 import FontSize from "../constants/fontsize";
 import Screen from "../components/Screen";
 import Spacing from "../constants/spacing";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required().label("First Name"),
@@ -40,41 +42,41 @@ const user = {
 };
 
 function RegisterScreen({ navigation }) {
-async function userRegistration(values) {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  async function userRegistration(values) {
     axios({
-        method: 'post',
-        url: 'http://13.60.18.198:3000/users/signup',
-        data: {
-            fname: values.firstname,
-            lname: values.lastname,
-            password: values.password,
-            email: values.email,
-            mobileNum: values.mobile
-        },
-        headers: {
-            'Content-Type': 'application/json'
-        }
+      method: "post",
+      url: "http://13.60.18.198:3000/users/signup",
+      data: {
+        fname: values.firstname,
+        lname: values.lastname,
+        password: values.password,
+        email: values.email,
+        mobileNum: values.mobile,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .then(response => {
-        console.log('User registered successfully:', response.data);
-    })
-    .catch(error => {
-        console.error('There was an error registering the user!', error);
-    });
-}
-
+      .then((response) => {
+        console.log("User registered successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error registering the user!", error);
+      });
+  }
 
   const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSubmit =async (values) => {
+  const handleSubmit = async (values) => {
     if (
       values.firstname !== null &&
       values.lastname !== null &&
       values.mobile !== null &&
       values.email !== null &&
-      values.password 
+      values.password
     ) {
-      await userRegistration(values)
+      await userRegistration(values);
       setSuccessMessage("Registration Successful! Welcome!");
       Alert.alert("Registration Successful", "Welcome!", [
         { text: "OK", onPress: () => navigation.navigate("Login") },
@@ -141,8 +143,19 @@ async function userRegistration(values) {
             icon="lock"
             name="password"
             placeholder="Password"
-            secureTextEntry
+            secureTextEntry={!passwordVisible}
             textContentType="password"
+            rightIcon={
+              <TouchableOpacity
+                onPress={() => setPasswordVisible(!passwordVisible)}
+              >
+                <MaterialIcons
+                  name={passwordVisible ? "visibility-off" : "visibility"}
+                  size={24}
+                  color={Colors.medium}
+                />
+              </TouchableOpacity>
+            }
           />
           <View style={styles.buttonContainer}>
             <SubmitButton title="Register" />
@@ -177,7 +190,7 @@ const styles = StyleSheet.create({
   imageBackground: {
     height: height / 4,
     width: "100%",
-    marginBottom: Spacing * 2, // Adds space below the image
+    marginBottom: Spacing * 2,
   },
   titleText: {
     fontSize: FontSize.xxLarge,
