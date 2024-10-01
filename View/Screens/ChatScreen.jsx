@@ -48,7 +48,7 @@ const handleSend = async () => {
     if (!response.ok) {
       console.error("Error:", data.Error);
     } else {
-      alert("Message sent successfully");
+      alert("Message  sent successfully");
       console.log("Message sent successfully:", data);
       //set to display the message sent
       //response message set to display
