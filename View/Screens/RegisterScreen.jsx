@@ -43,7 +43,7 @@ const user = {
 
 function RegisterScreen({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
-async function userRegistration(values) {
+  async function userRegistration(values) {
     axios({
       method: "post",
       url: "https://railexpress.netlify.app/api/users/signup",
@@ -145,7 +145,7 @@ async function userRegistration(values) {
             placeholder="Password"
             secureTextEntry={!passwordVisible}
             textContentType="password"
-            rightIcon={
+            secIcon={
               <TouchableOpacity
                 onPress={() => setPasswordVisible(!passwordVisible)}
               >

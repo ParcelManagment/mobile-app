@@ -27,24 +27,8 @@ const validationSchema = Yup.object().shape({
 
 const { height } = Dimensions.get("window");
 
-const users = {
-  email: "test@example.com",
-  password: "password123",
-};
-
-
-
 function LoginScreen({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const handleSubmit = (values) => {
-    if (values.email === users.email && values.password === users.password) {
-      Alert.alert("Login Successful", "Welcome back!", [
-        { text: "OK", onPress: () => navigation.navigate("Home") },
-      ]);
-    } else {
-      Alert.alert("Login Failed", "Invalid email or password");
-    }
-
   async function userLogin(values) {
     axios({
       method: "post",
@@ -68,6 +52,16 @@ function LoginScreen({ navigation }) {
         console.error("There was an error Login the user!", error);
       });
   }
+
+  const handleSubmit = async (values) => {
+    await userLogin(values);
+    // if (values.email === users.email && values.password === users.password) {
+    //   Alert.alert("Login Successful", "Welcome back!", [
+    //     { text: "OK", onPress: () => navigation.navigate("Home") },
+    //   ]);
+    // } else {
+    //   Alert.alert("Login Failed", "Invalid email or password");
+    // }
   };
 
   return (
@@ -101,7 +95,7 @@ function LoginScreen({ navigation }) {
             name="password"
             secureTextEntry={!passwordVisible}
             textContentType="password"
-            rightIcon={
+            secIcon={
               <TouchableOpacity
                 onPress={() => setPasswordVisible(!passwordVisible)}
               >
