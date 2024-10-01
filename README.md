@@ -3,6 +3,7 @@
 This mobile application is designed to manage and track parcel deliveries efficiently. It provides features for users to register, log in, manage parcels, and get real-time tracking information.
 
 ## Table of Contents
+
 - [Features](#features)
 - [Technologies](#technologies)
 - [Installation](#installation)
@@ -30,16 +31,19 @@ This mobile application is designed to manage and track parcel deliveries effici
 To run this app locally, follow these steps:
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/ParcelManagment/mobile-app.git
    ```
 
 2. Navigate to the project directory:
+
    ```bash
    cd mobile-app
    ```
 
 3. Install dependencies:
+
    ```bash
    npm install -g expo-cli
    ```
@@ -50,6 +54,7 @@ To run this app locally, follow these steps:
    ```
 
 ## Usage
+
 - Register or log in to the application using your credentials.
 - After logging in, you can manage your parcels, track their current status, and get updates.
 - Tap the chat icon at the bottom-right of the home screen to access support or customer service.
@@ -57,12 +62,21 @@ To run this app locally, follow these steps:
 ## Screenshots
 
 ### Welcome Screen
-![Welcome Screen](./assets/screenshots/welcome.png)
+
+![Welcome Screen](./View/Assets/screenshots/welcome.png)
+
 ### Log in Screen
-![Login Screen](./assets/screenshots/login.png)
+
+![Login Screen](./View/Assets/screenshots/login.png)
+
 ### Register Screen
-![Register Screen](./assets/screenshots/register.png)
+
+![Register Screen](./View/Assets/screenshots/register.png)
+
 ### Home Screen
-![Home Screen](./assets/screenshots/home.png)
+
+![Home Screen](./View/Assets/screenshots/home.png)
+
 ### Chat Screen
-![Chat Screen](./assets/screenshots/chat.png)
+
+![Chat Screen](./View/Assets/screenshots/chat.png)
