@@ -37,7 +37,7 @@ function LoginScreen({ navigation }) {
   async function userLogin(values) {
     axios({
       method: "post",
-      url: " https://parcelmanagement.netlify.app/api/users/login",
+      url: "https://railexpress.netlify.app/api/users/login",
       data: {
         password: values.password,
         email: values.email,
@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: FontSize.xxLarge,
     color: Colors.black,
-    fontFamily: Font["Inter-bold"],
     textAlign: "center",
     marginBottom: Spacing * 2,
   },
