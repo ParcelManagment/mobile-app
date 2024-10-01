@@ -45,7 +45,7 @@ function RegisterScreen({ navigation }) {
 async function userRegistration(values) {
     axios({
       method: "post",
-      url: " https://parcelmanagement.netlify.app/api/users/signup",
+      url: "https://railexpress.netlify.app/api/users/signup",
       data: {
         fname: values.firstname,
         lname: values.lastname,
@@ -184,7 +184,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: FontSize.xxLarge,
     color: Colors.black,
-    fontFamily: Font["Inter-bold"],
     textAlign: "center",
   },
   subtitleText: {

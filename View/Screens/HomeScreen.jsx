@@ -5,31 +5,59 @@ import {
   Text,
   View,
   TouchableOpacity,
+  ImageBackground,
+  Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Screen from "../components/Screen";
 import Colors from "../constants/colors";
 import FontSize from "../constants/fontsize";
-import Spacing from "../constants/spacing";
 
-const { height } = Dimensions.get("window");
+const { height, width } = Dimensions.get("window");
 
 function HomeScreen({ navigation }) {
   return (
     <Screen style={styles.container}>
-      <Text style={styles.titleText}>Home</Text>
-      <TouchableOpacity
-        style={styles.chatFab}
-        onPress={() => navigation.navigate("Chat")}
+      <ImageBackground
+        source={require("../Assets/images/background.png")} // Replace with your image path
+        style={styles.backgroundImage}
+        resizeMode="cover"
       >
-        <Ionicons name="chatbubble-ellipses-outline" size={24} color="white" />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.locationFab}
-        onPress={() => navigation.navigate("Location")}
-      >
-        <Ionicons name="location-sharp" size={24} color="white" />
-      </TouchableOpacity>
+        <View style={styles.headerContainer}>
+          <Text style={styles.titleText}>Welcome Home</Text>
+          <Text style={styles.subtitleText}>
+            Manage your activities quickly and efficiently
+          </Text>
+        </View>
+
+        {/* Image above buttons */}
+        <Image
+          source={require("../Assets/images/home.png")} // Replace with your image path
+          style={styles.topImage}
+          resizeMode="contain"
+        />
+
+        {/* Buttons horizontally aligned */}
+        <View style={styles.fabContainer}>
+          <TouchableOpacity
+            style={styles.fab}
+            onPress={() => navigation.navigate("Chat")}
+          >
+            <Ionicons
+              name="chatbubble-ellipses-outline"
+              size={28}
+              color="white"
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.fab}
+            onPress={() => navigation.navigate("Location")}
+          >
+            <Ionicons name="location-sharp" size={28} color="white" />
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </Screen>
   );
 }
@@ -37,22 +65,41 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#f8f9fa",
-    padding: 20,
+    width: width,
+    height: height,
+    marginTop: -50,
+  },
+  headerContainer: {
+    alignItems: "center",
+    marginTop: height * 0.1,
   },
   titleText: {
-    fontSize: 24,
-    color: "black",
-    fontFamily: "Inter-bold",
-    textAlign: "center",
-    marginBottom: 40,
+    fontSize: FontSize.large,
+    color: "white",
+    fontWeight: "bold",
   },
-  chatFab: {
-    position: "absolute",
-    bottom: 30,
-    right: -45,
+  subtitleText: {
+    fontSize: FontSize.medium,
+    color: "#fff", // Use white or a contrasting color for better readability
+    textAlign: "center",
+    paddingHorizontal: 30,
+  },
+  topImage: {
+    width: 500, // Adjust width as needed
+    height: 500, // Adjust height as needed
+  },
+  fabContainer: {
+    flexDirection: "row", // Align buttons horizontally
+    justifyContent: "space-around",
+    width: width * 0.8,
+    marginBottom: height * 0.05,
+  },
+  fab: {
     backgroundColor: Colors.primary,
     width: 60,
     height: 60,
@@ -62,30 +109,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 5,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  locationFab: {
-    position: "absolute",
-    bottom: 30,
-    right: 45,
-    backgroundColor: Colors.primary, 
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOpacity: 0.3,
+    shadowRadius: 6.27,
+    elevation: 10,
+    marginHorizontal: 10, // Add horizontal space between the buttons
   },
 });
 
