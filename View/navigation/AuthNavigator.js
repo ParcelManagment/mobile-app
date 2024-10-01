@@ -28,7 +28,7 @@ const AuthNavigator = () => (
     <Stack.Screen name="Location" component={LocationScreen} />
     <Stack.Screen name="Home" component={HomeScreen} />
     <Stack.Screen name="Chat" component={ChatScreen} />
-    <Stack.Screen name="Map" component={MapScreen} />
+    <Stack.Screen name="Device Location" component={MapScreen} />
   </Stack.Navigator>
 );
 

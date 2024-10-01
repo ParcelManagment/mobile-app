@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: FontSize.xxLarge,
     color: Colors.black,
-    fontFamily: Font["Inter-bold"],
     textAlign: "center",
   },
   subtitleText: {
@@ -98,7 +97,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: FontSize.medium,
-    fontFamily: Font["Inter-bold"],
     color: Colors.black,
     textAlign: "center",
   },

@@ -6,13 +6,16 @@ import {
   TouchableOpacity,
   Alert,
   StyleSheet,
+  Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
+
+// Updated device list, now called parcels
 const devices = [
-  { id: "1", name: "Device 1" },
-  { id: "2", name: "Device 2" },
-  { id: "3", name: "Device 3" },
-  // Add more devices as needed
+  { id: "1", name: "Parcel 1 Kaluthara to Jaffna" },
+  { id: "2", name: "Parcel 2 Galle to Mathara" },
+  { id: "3", name: "Parcel 3 Maradana to Galle" },
 ];
 
 const HomeScreen = () => {
@@ -21,8 +24,8 @@ const HomeScreen = () => {
 
   const handleDeviceSelect = (device) => {
     setSelectedDevice(device);
-    Alert.alert("Device Selected", `Device ID: ${device.id}`);
-    navigation.navigate("Map", { device });
+    Alert.alert("Parcel Selected", `Parcel ID: ${device.id}`);
+    navigation.navigate("Device Location", { device });
   };
 
   const renderDevice = ({ item }) => (
@@ -36,9 +39,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>Select a Device</Text>
-          {devices.length === 0 ? (
-        <Text style={styles.noDevicesText}>You have no devices yet.</Text>
+      <Text style={styles.titleText}>Select a Parcel</Text>
+      {devices.length === 0 ? (
+        <Text style={styles.noDevicesText}>You have no parcels yet.</Text>
       ) : (
         <FlatList
           data={devices}
@@ -46,6 +49,12 @@ const HomeScreen = () => {
           keyExtractor={(item) => item.id}
         />
       )}
+
+      <Image
+        source={require("../Assets/images/chat.png")} 
+        style={styles.image}
+        resizeMode="contain" 
+      />
     </View>
   );
 };
@@ -55,24 +64,42 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#f8f9fa",
+    backgroundColor: "#ffffff", 
     padding: 20,
   },
   titleText: {
-    fontSize: 24,
-    color: "black",
-    fontFamily: "Inter-bold",
+    fontSize: 28,
+    color: "#fbbc41", 
+    fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
   },
   deviceItem: {
     padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    marginVertical: 10,
+    backgroundColor: "#fbbc41", 
+    borderRadius: 20,
     width: "100%",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 8,
   },
   deviceText: {
     fontSize: 18,
+    color: "#ffffff", 
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  noDevicesText: {
+    fontSize: 16,
+    color: "#fbbc41",
+  },
+  image: {
+    marginBottom: 60,
+    width: 500, 
+    height: 300, 
   },
 });
 

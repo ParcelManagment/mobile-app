@@ -43,10 +43,10 @@ const user = {
 
 function RegisterScreen({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  async function userRegistration(values) {
+async function userRegistration(values) {
     axios({
       method: "post",
-      url: "http://13.60.18.198:3000/users/signup",
+      url: "https://railexpress.netlify.app/api/users/signup",
       data: {
         fname: values.firstname,
         lname: values.lastname,
@@ -195,7 +195,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: FontSize.xxLarge,
     color: Colors.black,
-    fontFamily: Font["Inter-bold"],
     textAlign: "center",
   },
   subtitleText: {

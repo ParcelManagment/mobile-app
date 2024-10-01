@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Dimensions,
   Image,
@@ -31,6 +32,8 @@ const users = {
   password: "password123",
 };
 
+
+
 function LoginScreen({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const handleSubmit = (values) => {
@@ -41,6 +44,30 @@ function LoginScreen({ navigation }) {
     } else {
       Alert.alert("Login Failed", "Invalid email or password");
     }
+
+  async function userLogin(values) {
+    axios({
+      method: "post",
+      url: "https://railexpress.netlify.app/api/users/login",
+      data: {
+        password: values.password,
+        email: values.email,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        Alert.alert("Login Successful", "Welcome back!", [
+          { text: "OK", onPress: () => navigation.navigate("Home") },
+        ]);
+        console.log("User Login successfully:", response.data);
+      })
+      .catch((error) => {
+        Alert.alert("Login Failed", "Invalid email or password");
+        console.error("There was an error Login the user!", error);
+      });
+  }
   };
 
   return (
@@ -120,7 +147,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: FontSize.xxLarge,
     color: Colors.black,
-    fontFamily: Font["Inter-bold"],
     textAlign: "center",
     marginBottom: Spacing * 2,
   },
