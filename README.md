@@ -56,8 +56,8 @@ To run this app locally, follow these steps:
 ## Usage
 
 - Register or log in to the application using your credentials.
-- After logging in, you can manage your parcels, track their current status, and get updates.
-- Tap the chat icon at the bottom-right of the home screen to access support or customer service.
+- Tap the location icon at the bottom-right of the home screen manage your parcels, track their current status, and get updates.
+- Tap the chat icon at the bottom-left of the home screen to access support or customer service.
 
 ## Screenshots
 
@@ -80,3 +80,7 @@ To run this app locally, follow these steps:
 ### Chat Screen
 
 ![Chat Screen](./View/Assets/screenshots/chat.png)
+
+### Location Screen
+
+![Location Screen](./View/Assets/screenshots/location.png)
