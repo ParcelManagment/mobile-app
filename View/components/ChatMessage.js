@@ -1,8 +1,35 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet,TouchableOpacity } from "react-native";
 import Colors from "../constants/colors";
+import { useNavigation } from "@react-navigation/native";
 
-const ChatMessage = ({ text, timestamp, isUser }) => {
+const ChatMessage = ({ text, timestamp, isUser ,isLocation }) => {
+if(isLocation){
+const navigation = useNavigation();
+
+const handlePress = () => {
+    navigation.navigate("MapScreen", {
+      id: "1",
+      name: "Parcel 1",
+      location: text.split(": ")[1],
+    });
+};
+
+return (
+  <TouchableOpacity onPress={handlePress} disabled={!isLocation}>
+    <View
+      style={[
+        styles.messageContainer,
+        isUser ? styles.userMessage : styles.botMessage,
+      ]}
+    >
+      <Text style={styles.messageText}>{text}</Text>
+      <Text style={styles.timestamp}>{timestamp}</Text>
+    </View>
+  </TouchableOpacity>
+);
+//AAAA0087
+}
     return (
         <View
             style={[

@@ -15,7 +15,14 @@ import FontSize from "../constants/fontsize";
 
 const { height, width } = Dimensions.get("window");
 
-function HomeScreen({ navigation }) {
+function HomeScreen({route, navigation }) {
+  const { email } = route.params;
+  const newEmail = "lakdaya@gmail.com";
+  console.log(
+    {
+      email:email
+    }
+  )
   return (
     <Screen style={styles.container}>
       <ImageBackground
@@ -41,7 +48,7 @@ function HomeScreen({ navigation }) {
         <View style={styles.fabContainer}>
           <TouchableOpacity
             style={styles.fab}
-            onPress={() => navigation.navigate("Chat")}
+            onPress={() => navigation.navigate("Chat", { email: newEmail })}
           >
             <Ionicons
               name="chatbubble-ellipses-outline"
@@ -52,7 +59,7 @@ function HomeScreen({ navigation }) {
 
           <TouchableOpacity
             style={styles.fab}
-            onPress={() => navigation.navigate("Location")}
+            onPress={() => navigation.navigate("Location", { email: newEmail })}
           >
             <Ionicons name="location-sharp" size={28} color="white" />
           </TouchableOpacity>
