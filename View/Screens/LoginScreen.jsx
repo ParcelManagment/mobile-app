@@ -43,7 +43,7 @@ function LoginScreen({ navigation }) {
     })
       .then((response) => {
         Alert.alert("Login Successful", "Welcome back!", [
-          { text: "OK", onPress: () => navigation.navigate("Home") },
+          { text: "OK", onPress: () => navigation.navigate("Home",{email:values.email}) },
         ]);
         console.log("User Login successfully:", response.data);
       })

@@ -18,21 +18,22 @@ const MapScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-    
       <Text style={styles.titleText}>Map Screen</Text>
       <Text style={styles.deviceInfoText}>Selected Device: {device.name}</Text>
       <Text style={styles.deviceInfoText}>Device ID: {device.id}</Text>
+      
+   
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: 6.9025,
+          longitude: 79.806073,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
       >
         <Marker
-          coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
+          coordinate={{ latitude: 6.9025, longitude: 79.806073 }}
           title={"My Marker"}
           description={"This is a marker in San Francisco"}
         />

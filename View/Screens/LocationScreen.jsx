@@ -11,17 +11,44 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 
-// Updated device list, now called parcels
-const devices = [
-  { id: "1", name: "Parcel 1 Kaluthara to Jaffna" },
-  { id: "2", name: "Parcel 2 Galle to Mathara" },
-  { id: "3", name: "Parcel 3 Maradana to Galle" },
-];
 
-const HomeScreen = () => {
+
+const LocationScreen = ({route}) => {
+  //const email = "lakdaya@gmail.com";
+  const { email } = route.params;
+  
+  const getUserId = async () => {
+    try {
+      // Make GET request to the API route with the email parameter
+      const response = await fetch(
+        `https://railexpress.netlify.app/api/device/user/id/${email}`
+      );
+      const data = await response.json();
+
+      if (response.ok) {
+        // If the response is successful, set the userId state
+        console.log(data.userId);
+        Alert.alert("User ID fetched!", `User ID: ${data.userId}`);
+      } else {
+        // If user not found, show an alert
+        Alert.alert("Error", data.message || "User not found");
+      }
+    } catch (error) {
+      //console.error("Error fetching user ID:", error);
+      //Alert.alert("Error", "Something went wrong.");
+    }
+  };
+getUserId();
+  //   devices = [
+  //   { id: "1", name: "Parcel 1", location: "6.9025,79.806073" },
+  //   { id: "2", name: "Parcel 2", location: "6.9025,79.806073" },
+  // ]
   const navigation = useNavigation();
   const [selectedDevice, setSelectedDevice] = useState(null);
-
+  const [devices, setDevices] = useState([
+    { id: "1", name: "Parcel 1", location: "6.9025,79.806073" },
+    { id: "2", name: "Parcel 2", location: "6.9025,79.806073" },
+  ]);
   const handleDeviceSelect = (device) => {
     setSelectedDevice(device);
     Alert.alert("Parcel Selected", `Parcel ID: ${device.id}`);
@@ -40,6 +67,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Select a Parcel</Text>
+
       {devices.length === 0 ? (
         <Text style={styles.noDevicesText}>You have no parcels yet.</Text>
       ) : (
@@ -51,9 +79,9 @@ const HomeScreen = () => {
       )}
 
       <Image
-        source={require("../Assets/images/chat.png")} 
+        source={require("../Assets/images/chat.png")}
         style={styles.image}
-        resizeMode="contain" 
+        resizeMode="contain"
       />
     </View>
   );
@@ -103,4 +131,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default LocationScreen;
